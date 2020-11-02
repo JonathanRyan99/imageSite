@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+<body>
+  <%- include('./partials/navbar.ejs') %>
+
+  <div class="container">
+    
+    <img class="responsive-img"  src="/<%= wallpapers.path %>"> 
+    <h5>Tags</h5>
+    <p><%=wallpapers.tags%></p>
+    
+    <form action="/content/:id" method="post">
+      <input type="text" id="newTag" name="newTag" required>
+      <button value="<%=wallpapers._id%>" name="id">Submit</button>
+    </form>
+  
+  
+  
+    </div>
+
+</body>
+</html>
+
