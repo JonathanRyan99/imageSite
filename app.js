@@ -50,7 +50,7 @@ app.get('/index',(req,res) => {
 });
 
 //tag search
-app.post('/index/:userSearch',(req,res) =>{
+app.post('/index',(req,res) =>{
     //search = req.body.userSearch
     console.log(req.body);
     wallpapers.find({tags: req.body.userSearch})
