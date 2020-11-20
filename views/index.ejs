@@ -1,19 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
   <%- include('./partials/head.ejs') %>
-<body>
+  <style>
+    .picture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    justify-items: center;
+    grid-gap: 5px;
+    grid-row-gap: 15px;
+    }
+
+    .grid-box img {
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+        object-fit: cover;
+        border-radius: 5px;
+
+    }
+  
+  </style>
+
+  <body class= "grey lighten-4">
   <%- include('./partials/navbar.ejs') %>
 
-  <div class="container">
+  <div class="container picture-grid">
     <!-- Page Content goes here -->
-    <%= wallpapers %>
+  
     <% if (wallpapers.length > 0 ) { %>
-
-      <% wallpapers.forEach(wallpaper => { %>
       
-        <a href="/content/<%= wallpaper._id %>">
-          <img class="responsive-img hoverable "  src="<%= wallpaper.path %>">
-        </a>
+        <% wallpapers.forEach(wallpaper => { %>
+        <div class= "grid-box">
+            <a href="/content/<%= wallpaper._id %>">
+                <img src="<%= wallpaper.path %>" >
+            </a>
+        </div>
       
       <% }); %>
     <% }else{  %>
@@ -21,6 +42,7 @@
       <p>no images found</p>
   
       <% } %>
+  </div>
 </body>
 </html>
 

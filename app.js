@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose =require('mongoose');
+const mongoose = require('mongoose');
 const wallpapers = require('./models/wallpaperModel');
 //when a request is made to this express server, express reads down this page looking for a response that fits
 //if it does and the response is triggered that is the end of the interaction and does not travel further down the page.
@@ -10,7 +10,6 @@ const app = express();
 
 
 //connect to database
-
 mongoose.connect('mongodb://localhost/ImageBoard',{ useUnifiedTopology: true , useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -49,9 +48,10 @@ app.get('/index',(req,res) => {
 
 });
 
+
 //tag search
 app.post('/index',(req,res) =>{
-    //search = req.body.userSearch
+    //imformation from page stored in req.body search = req.body.userSearch
     console.log(req.body);
     wallpapers.find({tags: req.body.userSearch})
     .then((result) => {
@@ -61,7 +61,6 @@ app.post('/index',(req,res) =>{
         console.log(err);
     })
 });
-
 
 
 

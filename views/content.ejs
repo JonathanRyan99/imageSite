@@ -8,12 +8,33 @@
     
     <img class="responsive-img"  src="/<%= wallpapers.path %>"> 
     <h5>Tags</h5>
-    <p><%=wallpapers.tags%></p>
     
-    <form action="/content/:id" method="post">
-      <input type="text" id="newTag" name="newTag" required>
-      <button value="<%=wallpapers._id%>" name="id">Submit</button>
-    </form>
+    
+
+    <% if (wallpapers.tags.length > 0 ) { %>
+      
+        <% wallpapers.tags.forEach(tag => { %> 
+          <div class="chip">
+            <%= tag %>
+          </div>
+        <% }); %>
+    
+        <% }else{  %>
+  
+      <p>Add the first tag</p>
+
+    <% } %>
+    
+    
+
+    
+    <div class="container center">
+      <form action="/content/:id" method="post">
+        <input type="text" placeholder="add a new tag" id="newTag" name="newTag" required>
+        <button class= "btn-small" value="<%=wallpapers._id%>" name="id">Submit</button>
+       
+      </form>
+    </div>
   
   
   
