@@ -2,6 +2,7 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 const wallpapers = require('./models/wallpaperModel');
+const fs = require('fs');
 //when a request is made to this express server, express reads down this page looking for a response that fits
 //if it does and the response is triggered that is the end of the interaction and does not travel further down the page.
 
@@ -86,6 +87,7 @@ app.get('/content/:id', ( req, res) => {
 app.post('/content/:id',(req,res) =>{
     console.log(req.body);
     id = req.body.id
+    console.log(req.body.remove)
     wallpapers.updateOne({_id : req.body.id} ,{$addToSet : {tags: req.body.newTag }})
     .then((result) => {
         console.log("update successful");
@@ -105,6 +107,25 @@ app.post('/content/:id',(req,res) =>{
 
 });
 
+app.post('/remove', ( req, res) => {
+    id = req.body.remove_id;
+    path = req.body.remove_filepath;
+    console.log(id);
+    try {
+        fs.unlinkSync("public" + path);
+        console.log("file " + path + " removed from file system");
+
+    } catch (err) {
+        console.log(err);
+    }
+    wallpapers.deleteOne({ _id: (id) }).then(function(){ 
+        console.log("removed from database"); // Success 
+    }).catch(function(error){ 
+        console.log(error); // Failure 
+    });
+
+    res.redirect('/index');
+});
 
 
 

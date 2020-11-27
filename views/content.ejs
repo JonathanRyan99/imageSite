@@ -5,6 +5,15 @@
   <%- include('./partials/navbar.ejs') %>
   <%- include('./partials/searchbar.ejs') %>
 
+  <div class="container center">
+    <form action="/remove" method="post">
+      <input type="hidden" name="remove_filepath" value="/<%= wallpapers.path %>">
+      <button class= "btn-small" name="remove_id" value="<%=wallpapers._id%>">Remove</button>
+    </form>
+  </div>
+
+
+
   <div class="container">
     
     <img class="responsive-img"  src="/<%= wallpapers.path %>"> 
