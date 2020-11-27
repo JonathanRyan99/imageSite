@@ -110,7 +110,6 @@ app.post('/content/:id',(req,res) =>{
 app.post('/remove', ( req, res) => {
     id = req.body.remove_id;
     path = req.body.remove_filepath;
-    console.log(id);
     try {
         fs.unlinkSync("public" + path);
         console.log("file " + path + " removed from file system");
