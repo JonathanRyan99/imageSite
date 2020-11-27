@@ -3,6 +3,7 @@
   <%- include('./partials/head.ejs') %>
 <body>
   <%- include('./partials/navbar.ejs') %>
+  <%- include('./partials/searchbar.ejs') %>
 
   <div class="container">
     
@@ -32,7 +33,6 @@
       <form action="/content/:id" method="post">
         <input type="text" placeholder="add a new tag" id="newTag" name="newTag" required>
         <button class= "btn-small" value="<%=wallpapers._id%>" name="id">Submit</button>
-       
       </form>
     </div>
   

@@ -1,4 +1,5 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 const wallpapers = require('./models/wallpaperModel');
 //when a request is made to this express server, express reads down this page looking for a response that fits
@@ -28,6 +29,8 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 //middle wear that decodes/encodes post request information
 app.use(express.urlencoded({extended: true}));
+//default options
+app.use(fileUpload());
 
 
 //get browser request and reply with rendered page
@@ -108,6 +111,30 @@ app.post('/content/:id',(req,res) =>{
 app.get('/upload', ( req, res) => {
     res.render('upload', {title: 'Upload'});
 });
+
+app.post('/upload', function(req, res) {
+    //console.log(req.files.sampleFile); // the uploaded file object
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    let sampleFile = req.files.sampleFile;
+    let path = "./public/" + req.files.sampleFile.name;
+    // Use the mv() method to place the file somewhere on your server
+    sampleFile.mv(path, function(err) {
+        if (err)
+            console.log(err);
+    });
+
+    //creates model of upload for the db using wallpapers shchema
+    var upload = new wallpapers({
+        path: req.files.sampleFile.name
+    });
+    //saves upload to the database
+    upload.save(function (err, upload) {
+        if (err) return console.error(err);
+        console.log("file uploaded to database");
+    });
+    res.render('upload', {title: 'Upload'});
+        
+  });
 
 
 //404 page

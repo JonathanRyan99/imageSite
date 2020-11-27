@@ -3,6 +3,33 @@
   <%- include('./partials/head.ejs') %>
 <body>
   <%- include('./partials/navbar.ejs') %>
+
+  <div class="container center">
+    <form ref='uploadForm' 
+    id='uploadForm' 
+    action='/upload' 
+    method='post' 
+    encType="multipart/form-data">
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>File</span>
+          <input type="file" name="sampleFile" accept="image/*">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light" type="submit">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </form>
+   
+          
+  </div>
+
+
+
+
 </body>
 </html>
 
